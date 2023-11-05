@@ -7,6 +7,8 @@
 
     const dispatch = createEventDispatcher();
 
+    const API_ENDPOINT = "http://54.210.73.216:"
+
     let name = '';
     let password = '';
 
@@ -21,10 +23,11 @@
 
     async function doesUserExist(username) {
         try {
-            const response = await fetch(`http://3.84.46.162:7070/retrieve_user_data/${encodeURIComponent(username)}`);
-
-            if (response.ok) {
+            const response = await fetch(`${API_ENDPOINT}7060/retrieve_user_data/${encodeURIComponent(username)}`);
+            console.log(`${API_ENDPOINT}7060/retrieve_user_data/${encodeURIComponent(username)}`)
+            if (response.status === 200) {
                 // If the response is okay, then the user exists
+                
                 return true;
             } else if (response.status === 404) {
                 // If the response is a 404, then the user does not exist
@@ -58,7 +61,7 @@
 
     async function handleSignUp() {
         console.log('Signing up with:', name, password);
-        const userExists = false //await doesUserExist(name);
+        const userExists = await doesUserExist(name);
         if(userExists) {
             alert("Username is already taken!")
             return;

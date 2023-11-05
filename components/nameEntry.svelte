@@ -1,14 +1,14 @@
 <script>
     export let name = ""; // Exported so it can be bound to a parent component
-  
-    // Optional: An update event that can be listened to by parent components
-    export let onUpdate = (value) => {};
-    
+
+    import { createEventDispatcher } from 'svelte';
+    const dispatch = createEventDispatcher();
+
     // Handles input changes
     function handleChange(event) {
       const { value } = event.target;
       name = value;
-      onUpdate(name); // Emit the updated value
+      dispatch('update', { name: value });  // Emit the updated value
     }
   </script>
   
